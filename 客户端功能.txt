@@ -1,0 +1,15 @@
+客户端上线流程：
+1、客户端连接服务器。消息格式：4字节+json字符串。
+2、客户端发送注册消息。消息内容：{"deviceNo":"63594242","messageType":"regist"}
+3、如果注册成功，服务器返回：{"deviceNo":"63594242","messageType":"regist","msgStatus":"success"}
+
+
+客户端向服务器发送心跳消息，消息内容：{"deviceNo":"63594242","messageType":"heartbeat"}
+服务器会返回：{"deviceNo":"63594242","messageType":"heartbeat","msgStatus":"alive"}
+
+
+客户端接收消息（不定时）：
+1、服务器下发消息给客户端。消息格式：{"command":"store","deviceNo":"63594242","lockAddress":"01000005"}
+2、客户端收到后，会返回消息给服务器。消息内容：{"command":"store","deviceNo":"63594242","lockAddress":"01000005","msgStatus":"success"}
+
+然后就是断线重连。
